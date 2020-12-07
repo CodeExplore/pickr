@@ -64,6 +64,7 @@ class Pickr {
         position: 'bottom-middle',
         adjustableNumbers: true,
         showAlways: false,
+        allowEmpty: false,
 
         closeWithKey: 'Escape'
     };
@@ -412,7 +413,7 @@ class Pickr {
 
             // Detect user input and disable auto-recalculation
             _.on(_root.interaction.result, ['focus', 'blur'], e => {
-                this._recalc = e.type === 'blur';
+                this._recalc = ( !options.allowEmpty || e.target.value ) && e.type === 'blur';
                 this._recalc && this._updateOutput(null);
             }),
 
